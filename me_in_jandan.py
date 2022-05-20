@@ -13,11 +13,12 @@ TARGET_USER_NAME = 'kasusa'
 BASE_URLS = ['http://jandan.net/treehole']
 BASE_URLS = ['http://jandan.net/pic']
 BASE_URLS = ['http://jandan.net/qa']
-BASE_URLS = ['http://jandan.net/treehole','http://jandan.net/pic','http://jandan.net/qa']
+BASE_URLS = ['http://jandan.net/treehole', 'http://jandan.net/pic', 'http://jandan.net/qa']
 # bull shit mode
 VERBOSE = True
 VERBOSE = False
-emojilist = ['👁️','🐸','👽','⚕️','❤️','👑']
+emojilist = ['😻', '🐸', '👽', '⚕️', '❤️', '👑']
+
 
 class Crawler:
     def __init__(self, base_url) -> None:
@@ -36,17 +37,31 @@ class Crawler:
             print(e)
 
     def find_post_in_page(self, page: BeautifulSoup) -> list:
-        result = ['http://jandan.net/t/'+i
-                  for i in list(map((lambda i: str(i).split("#comment-")[-1].split('&quot')[0]),
-                                    list(filter(lambda x: str(x).find(self.target) != -1,
-                                                page.select(".commentlist>li>div>div>div>small")))))]
+        result_map = []
+        result = []
+        for comment in [x for x in page.select('.commentlist>li') if self.target in str(x)]:
+            try:
+                result_map.append({
+                    'type': url.split('jandan.net/')[1].split('/')[0],
+                    'url': 'http://jandan.net/t/' + comment.select('.righttext>a')[0].text,
+                    'oo': comment.select('.tucao-like-container')[0].select('span')[0].text,
+                    'xx': comment.select('.tucao-unlike-container')[0].select('span')[0].text
+                })
+            except IndexError:
+                continue
+        for jsonitem in result_map:
+            result.append(f"{jsonitem['url']}\too {jsonitem['oo']}\t xx {jsonitem['xx']}")
+        # result = ['http://jandan.net/t/'+i
+        #           for i in list(map((lambda i: str(i).split("#comment-")[-1].split('&quot')[0]),
+        #                             list(filter(lambda x: str(x).find(self.target) != -1,
+        #                                         page.select(".commentlist>li>div>div>div>small")))))]
         if VERBOSE == True:
             print(f'Page {self.curpage} Found {len(result)} item(s).')
         else:
-            if len(result) !=0 :
-                emoji = emojilist[int((random()*100)) % len(emojilist)]
+            if len(result) != 0:
+                emoji = emojilist[int((random() * 100)) % len(emojilist)]
                 # emoji = emojilist[len(result)]
-                print(f'Page {self.curpage}: {len(result)} '+emoji)
+                print(f'Page {self.curpage}: {len(result)} ' + emoji)
         return result
 
     def find_post_in_page_detailed_notused(self, page: BeautifulSoup) -> list:
@@ -59,7 +74,7 @@ class Crawler:
         post_id_found = list(
             map((lambda i: str(i).split("#comment-")[-1].split('&quot')[0]), find_target))
         # Get Post URL
-        result = ['http://jandan.net/t/'+i for i in post_id_found]
+        result = ['http://jandan.net/t/' + i for i in post_id_found]
         print('Found %d items.' % len(result))
         return result
 
@@ -67,26 +82,29 @@ class Crawler:
         bs = BeautifulSoup(requests.get(
             self.base_url, headers=self.headers).text, "html.parser")
         self.max_pages = self.get_max_pages(bs)
-        for i in range(self.max_pages, self.max_pages-MAX_CRAW_PAGES, -1):
+        for i in range(self.max_pages, self.max_pages - MAX_CRAW_PAGES, -1):
             if i < 1:
                 break
-            url = self.base_url+'/' + \
-                base64.urlsafe_b64encode(
-                    (datetime.now().strftime("%Y%m%d").__str__()+'-'+str(i)).encode()
-                ).decode()
+            url = self.base_url + '/' + \
+                  base64.urlsafe_b64encode(
+                      (datetime.now().strftime("%Y%m%d").__str__() + '-' + str(i)).encode()
+                  ).decode()
             self.curpage = i
             try:
                 resp = requests.get(url, headers=self.headers)
             except Exception as e:
-                print('Something went wrong!'+e)
+                print('Something went wrong!' + e)
             if not resp.ok:
                 print('Oops! Something went wrong!')
                 continue
             # if pic or hole
-            self.results +=self.find_post_in_page(BeautifulSoup(resp.text, "html.parser"))
+            self.results += self.find_post_in_page(BeautifulSoup(resp.text, "html.parser"))
         return self.results
 
-print(f'''
+
+if __name__ == '__main__':
+    print(
+        f'''
 \033[0;34m当前配置：\033[0m
 （配置均可在py文件顶部更改）
 用户：{TARGET_USER_NAME}
@@ -96,19 +114,18 @@ url：{BASE_URLS}
 
 \033[0;34m注：\033[0m
 无聊图总页数约为180，树洞约为80，问答约为10
-若命令行支持，可以“ctrl+点击”打开url
-''')
+若命令行支持，可以“ctrl+点击”打开url''')
 
-print('🐢爬行中…')
-for url in BASE_URLS:
-    print(f"\033[0;33;40m{url}\033[0m")
-    linklist = Crawler(url).craw()
-    if  len(linklist) > 0:
-        #green color
-        print("\033[0;32m"+str(len(linklist))+' result(s) found'+"\033[0m")
-        for link in linklist:
-            print(link)
-    else:
-        print("\033[0;31mno result found\033[0m")
-    print("")
-input('🐢爬完啦~')
+    print('🐢爬行中…')
+    for url in BASE_URLS:
+        print(f"\033[0;33;40m{url}\033[0m")
+        linklist = Crawler(url).craw()
+        if len(linklist) > 0:
+            # green color
+            print("\033[0;32m" + str(len(linklist)) + ' result(s) found' + "\033[0m")
+            for link in linklist:
+                print(link)
+        else:
+            print("\033[0;31mno result found\033[0m")
+        print("")
+    input('🐢爬完啦~')

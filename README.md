@@ -36,6 +36,6 @@ VERBOSE = False
 **高阶**：另外还提供了一个`jandan.bat`，可以把它放在自己的用户目录，这样可以在命令行中快速启动脚本!
 
 # 未来计划
-- 增加oo、xx数量的显示
+- 增加oo、xx数量的显示 √
 - 使用 [pyscript](https://pyscript.net/) 把该脚本变成一个可以在线使用的webpage
 - 提升脚本速度
