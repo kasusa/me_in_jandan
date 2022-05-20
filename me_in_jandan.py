@@ -44,8 +44,8 @@ class Crawler:
             print(f'Page {self.curpage} Found {len(result)} item(s).')
         else:
             if len(result) !=0 :
-                # emoji = emojilist[int((random()*100)) % len(emojilist)]
-                emoji = emojilist[len(result)]
+                emoji = emojilist[int((random()*100)) % len(emojilist)]
+                # emoji = emojilist[len(result)]
                 print(f'Page {self.curpage}: {len(result)} '+emoji)
         return result
 
