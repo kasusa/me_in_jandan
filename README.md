@@ -16,7 +16,12 @@ pip install requests
 pip install base64
 pip install bs4
 ```
-然后你需要对配置文件进行修改，至少需要配置自己的用户名`TARGET_USER_NAME`。
+可以通过传递参数的方式来指定搜索用户名、爬取的页数（py和bat均有支持）。
+
+![image](https://user-images.githubusercontent.com/49443405/169511417-82041e87-7ea8-4907-8e20-0ca450c804b6.png)
+
+
+你可以对配置文件进行修改，如配置自己的用户名`TARGET_USER_NAME`。
 
 `BASE_URLS` 是要进行爬取的网站列表，如树洞、无聊图、问答区，去掉自己不需要爬取的url可以提升脚本的速度。
 ```
