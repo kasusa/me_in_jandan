@@ -17,7 +17,7 @@ BASE_URLS = ['http://jandan.net/treehole','http://jandan.net/pic','http://jandan
 # bull shit mode
 VERBOSE = True
 VERBOSE = False
-emojilist = ['👽','❤️','⚕️','🐸','👁️','👑']
+emojilist = ['👁️','🐸','👽','⚕️','❤️','👑']
 
 class Crawler:
     def __init__(self, base_url) -> None:
@@ -44,7 +44,8 @@ class Crawler:
             print(f'Page {self.curpage} Found {len(result)} item(s).')
         else:
             if len(result) !=0 :
-                emoji = emojilist[int((random()*100)) % len(emojilist)]
+                # emoji = emojilist[int((random()*100)) % len(emojilist)]
+                emoji = emojilist[len(result)]
                 print(f'Page {self.curpage}: {len(result)} '+emoji)
         return result
 
@@ -86,14 +87,15 @@ class Crawler:
         return self.results
 
 print(f'''
+\033[0;34m当前配置：\033[0m
+（配置均可在py文件顶部更改）
 用户：{TARGET_USER_NAME}
 页数：{MAX_CRAW_PAGES}
 url：{BASE_URLS}
 废话模式：{VERBOSE}
 
-注：
+\033[0;34m注：\033[0m
 无聊图总页数约为180，树洞约为80，问答约为10
-配置均可在py文件顶部更改
 若命令行支持，可以“ctrl+点击”打开url
 ''')
 
