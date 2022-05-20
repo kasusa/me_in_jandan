@@ -1,8 +1,5 @@
 from datetime import datetime
-from lib2to3.pgen2.token import GREATER
-from pickle import FALSE
 from random import random
-from unittest import result
 import requests
 import base64
 from bs4 import BeautifulSoup
