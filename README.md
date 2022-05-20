@@ -1,7 +1,8 @@
 # me_in_jandan
 欢迎蛋友！
 你可以利用脚本搜索自己在jandan发过的帖子。
-![image](https://user-images.githubusercontent.com/49443405/169438781-1489c4ed-0405-4712-b8ca-9f9d5bf9b768.png)
+<!-- ![image](https://user-images.githubusercontent.com/49443405/169438781-1489c4ed-0405-4712-b8ca-9f9d5bf9b768.png) -->
+![image](https://user-images.githubusercontent.com/49443405/169491375-e97f0eda-088a-4b21-947c-579d5e3f4798.png)
 
 # credit
 - kasusa 
