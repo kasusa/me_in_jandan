@@ -14,7 +14,7 @@ TARGET_USER_NAME = 'kasusa'
 BASE_URLS = ['http://jandan.net/treehole']
 BASE_URLS = ['http://jandan.net/pic']
 BASE_URLS = ['http://jandan.net/qa']
-BASE_URLS = ['http://jandan.net/treehole', 'http://jandan.net/pic', 'http://jandan.net/qa']
+BASE_URLS = ['http://jandan.net/pic','http://jandan.net/treehole', 'http://jandan.net/qa']
 # bull shit mode
 VERBOSE = True
 VERBOSE = False
