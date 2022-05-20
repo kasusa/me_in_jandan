@@ -16,7 +16,7 @@ pip install requests
 pip install base64
 pip install bs4
 ```
-可以通过传递参数的方式来指定搜索用户名、爬取的页数（py和bat均有支持）。
+可以通过传递参数的方式来指定搜索用户名、爬取的页数。
 
 ![image](https://user-images.githubusercontent.com/49443405/169511417-82041e87-7ea8-4907-8e20-0ca450c804b6.png)
 
