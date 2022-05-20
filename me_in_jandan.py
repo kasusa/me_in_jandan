@@ -1,5 +1,6 @@
 from datetime import datetime
 from random import random
+import sys
 import requests
 import base64
 from bs4 import BeautifulSoup
@@ -23,6 +24,9 @@ emojilist = ['😻', '🐸', '👽', '⚕️', '❤️', '👑']
 class Crawler:
     def __init__(self, base_url) -> None:
         self.target = TARGET_USER_NAME
+        if len(sys.argv) >= 2:
+            self.target = sys.argv[1]
+            print("⚡username:"+sys.argv[1])
         self.base_url = base_url
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101 Firefox/91.0'}
@@ -39,8 +43,10 @@ class Crawler:
     def find_post_in_page(self, page: BeautifulSoup) -> list:
         result_map = []
         result = []
-        for comment in [x for x in page.select('.commentlist>li') if self.target in str(x)]:
+        for comment in [x for x in page.select('.commentlist>li') if self.target in str(x.select('.author>strong'))]:
             try:
+                # print(comment.select('.author>strong'))
+                # input()
                 result_map.append({
                     'type': url.split('jandan.net/')[1].split('/')[0],
                     'url': 'http://jandan.net/t/' + comment.select('.righttext>a')[0].text,
@@ -82,7 +88,13 @@ class Crawler:
         bs = BeautifulSoup(requests.get(
             self.base_url, headers=self.headers).text, "html.parser")
         self.max_pages = self.get_max_pages(bs)
-        for i in range(self.max_pages, self.max_pages - MAX_CRAW_PAGES, -1):
+
+        crawpagecount = MAX_CRAW_PAGES
+        if len(sys.argv) >= 3:
+            crawpagecount = int(sys.argv[2])
+            print("⚡crawpagecount:"+sys.argv[2])
+
+        for i in range(self.max_pages, self.max_pages - crawpagecount, -1):
             if i < 1:
                 break
             url = self.base_url + '/' + \
