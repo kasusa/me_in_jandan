@@ -44,4 +44,4 @@ VERBOSE = False
 # 未来计划
 - 增加oo、xx数量的显示 √
 - 使用 [pyscript](https://pyscript.net/) 把该脚本变成一个可以在线使用的webpage
-- 提升脚本速度
+- 增加自己对他人帖子回复的查询功能（需要借助浏览器插件记录回复的帖子id）
