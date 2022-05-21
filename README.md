@@ -42,6 +42,7 @@ VERBOSE = False
 **高阶**：另外还提供了一个`jandan.bat`，可以把它放在自己的用户目录，这样可以在命令行中快速启动脚本!
 
 # 未来计划
-- 增加oo、xx数量的显示 √
-- 使用 [pyscript](https://pyscript.net/) 把该脚本变成一个可以在线使用的webpage
+- 增加oo、xx数量的显示 ✅
+<!-- - 使用 [pyscript](https://pyscript.net/) 把该脚本变成一个可以在线使用的webpage ❌(该计划不可行，pyscript不能使用requests库） -->
+- 考虑使用[django](https://github.com/Jason-Oleana/How-to-run-a-python-script-by-clicking-on-an-html-button)把该脚本变成一个可以在线使用的webpage
 - 增加自己对他人帖子回复的查询功能（需要借助浏览器插件记录回复的帖子id）
