@@ -13,6 +13,7 @@
 下载源码后，首先需要确保拥有这些pip包，下载pip包太慢可以参考这个[pip配置豆瓣源](https://kasusa.github.io/hugo/posts/pip%E9%85%8D%E7%BD%AE%E6%BA%90/)
 ```
 pip install bs4
+pip install requests
 ```
 可以通过传递参数的方式来指定搜索用户名、爬取的页数。
 
