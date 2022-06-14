@@ -51,12 +51,13 @@ class Crawler:
                     'type': url.split('jandan.net/')[1].split('/')[0],
                     'url': 'http://jandan.net/t/' + comment.select('.righttext>a')[0].text,
                     'oo': comment.select('.tucao-like-container')[0].select('span')[0].text,
-                    'xx': comment.select('.tucao-unlike-container')[0].select('span')[0].text
+                    'xx': comment.select('.tucao-unlike-container')[0].select('span')[0].text,
+                    'tucao': comment.select('.tucao-btn')[0].text
                 })
             except IndexError:
                 continue
         for jsonitem in result_map:
-            result.append(f"{jsonitem['url']}\too {jsonitem['oo']}\t xx {jsonitem['xx']}")
+            result.append(f"{jsonitem['url']}\too {jsonitem['oo']}\t xx {jsonitem['xx']}\t{jsonitem['tucao']}")
         # result = ['http://jandan.net/t/'+i
         #           for i in list(map((lambda i: str(i).split("#comment-")[-1].split('&quot')[0]),
         #                             list(filter(lambda x: str(x).find(self.target) != -1,
@@ -140,4 +141,4 @@ url：{BASE_URLS}
         else:
             print("\033[0;31mno result found\033[0m")
         print("")
-    input('🐢爬完啦~')
+    print('🐢爬完啦~')
