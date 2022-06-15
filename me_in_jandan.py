@@ -118,8 +118,8 @@ class Crawler:
 if __name__ == '__main__':
     print(
         f'''
+v1.1
 \033[0;34m当前配置：\033[0m
-（配置均可在py文件顶部更改）
 用户：{TARGET_USER_NAME}
 页数：{MAX_CRAW_PAGES}
 url：{BASE_URLS}
