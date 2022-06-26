@@ -131,7 +131,7 @@ url：{BASE_URLS}
 
     print('🐢爬行中…')
     for url in BASE_URLS:
-        print(f"\033[0;33;40m{url}\033[0m")
+        print(f"\033[0;33m{url}\033[0m")
         linklist = Crawler(url).craw()
         if len(linklist) > 0:
             # green color
